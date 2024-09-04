@@ -1,0 +1,82 @@
+﻿@page
+@model LifeUnscripted_Blog.Web.Areas.Administrator.Pages.ManageArticles.IndexModel
+@{
+    ViewData["Title"] = "Articles";
+}
+
+
+<h1>Articles</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                #
+            </th>
+            <th>
+                Title
+            </th>
+            <th>
+                Category
+            </th>
+            <th>
+                Auther
+            </th>
+            <th>
+                CreationDate
+            </th>
+            <th>
+                Status
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Articles)
+        {
+            <tr>
+                <td>
+                    @item.Id
+                </td>
+                <td>
+                    @item.Title
+                </td>
+                <td>
+                    @item.Category
+                </td>
+                <td>
+                    @item.Author
+                </td>
+                <td>
+                    @item.CreationDate
+                </td>
+                @if (item.IsDeleted)
+                {
+                    <td class="text-danger">
+                        Deleted
+                    </td>
+                }
+                else
+                {
+                    <td class="text-success">
+                        Active
+                    </td>
+                }
+                <td>
+                    <a asp-page="Edit" asp-route-id="@item.Id">Edit</a> |
+                    @if (item.IsDeleted)
+                    {
+                        <a asp-page-handler="ChangeIsDeleted" asp-route-id="@item.Id">Restore</a>
+                    }
+                    else
+                    {
+                        <a asp-page-handler="ChangeIsDeleted" asp-route-id="@item.Id">Delete</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

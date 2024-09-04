@@ -1,0 +1,66 @@
+﻿@page
+@model LifeUnscripted_Blog.Web.Areas.Administrator.Pages.ManageArticleCategories.CreateModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h2>Create New Article Category</h2>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post" asp-page="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label asp-for="@Model.ArticleCategory.Title" class="control-label"></label>
+                            <input asp-for="@Model.ArticleCategory.Title" class="form-control" />
+                            <span asp-validation-for="@Model.ArticleCategory.Title" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label asp-for="@Model.ArticleCategory.Slug" class="control-label"></label>
+                            <input asp-for="@Model.ArticleCategory.Slug" class="form-control" />
+                            <span asp-validation-for="@Model.ArticleCategory.Slug" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label asp-for="@Model.ArticleCategory.MetaTag" class="control-label"></label>
+                            <input asp-for="@Model.ArticleCategory.MetaTag" class="form-control" />
+                            <span asp-validation-for="@Model.ArticleCategory.MetaTag" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-8 col-sm-12">
+                        <div class="form-group">
+                            <label asp-for="@Model.ArticleCategory.MetaDescription" class="control-label"></label>
+                            <textarea asp-for="@Model.ArticleCategory.MetaDescription" class="form-control" rows="3"></textarea>
+                            <span asp-validation-for="@Model.ArticleCategory.MetaDescription" class="text-danger"></span>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group m-3">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

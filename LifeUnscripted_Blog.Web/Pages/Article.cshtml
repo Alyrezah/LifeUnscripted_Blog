@@ -1,0 +1,98 @@
+﻿@page "{slug}"
+@model LifeUnscripted_Blog.Web.Pages.ArticleModel
+@{
+    ViewData["Title"] = Model.Article.Title;
+}
+
+<div class="container">
+    <div class="row">
+        <!-- Latest Posts -->
+        <main class="post blog-post col-lg-8">
+            <div class="container">
+                <div class="post-single">
+                    <div class="post-thumbnail"><img src="~/pictures/Articles/@Model.Article.ImageName" alt="..." class="img-fluid"></div>
+                    <div class="post-details">
+                        <div class="post-meta d-flex justify-content-between">
+                            <div class="category"><a href="/Blog?Search.Category=@Model.Article.CategorySlug">@Model.Article.Category</a></div>
+                        </div>
+                        <h1>@Model.Article.Title<a href="#"><i class="fa fa-bookmark-o"></i></a></h1>
+                        <div class="post-footer d-flex align-items-center flex-column flex-sm-row">
+                            <a href="#" class="author d-flex align-items-center flex-wrap">
+                                <div class="avatar"><img src="~/site/img/avatar-1.jpg" alt="..." class="img-fluid"></div>
+                                <div class="title"><span>@Model.Article.Author</span></div>
+                            </a>
+                            <div class="d-flex align-items-center flex-wrap">
+                                <div class="date"><i class="icon-clock"></i>@Model.Article.CreationDate</div>
+                                <div class="comments meta-last"><i class="icon-comment"></i>@Model.Article.CommentCount</div>
+                            </div>
+                        </div>
+                        <div class="post-body">
+                            @Model.Article.Description
+                        </div>
+                        <div class="post-tags">
+                            @foreach (var item in Model.Article.MetaTag.Split(','))
+                            {
+                                <a href="#" class="tag">#@item</a>
+                            }
+                        </div>
+
+
+                        <div class="post-comments">
+                            <header>
+                                <h3 class="h6">Post Comments<span class="no-of-comments">(@Model.Article.CommentCount)</span></h3>
+                            </header>
+                            @foreach (var item in Model.Article.ArticleComments)
+                            {
+                                <div class="comment">
+                                    <div class="comment-header d-flex justify-content-between">
+                                        <div class="user d-flex align-items-center">
+                                            <div class="image"><img src="~/site/img/user.svg" alt="..." class="img-fluid rounded-circle"></div>
+                                            <div class="title"><strong>@item.Name</strong><span class="date">@item.CreationDate</span></div>
+                                        </div>
+                                    </div>
+                                    <div class="comment-body">
+                                        <p>
+                                            @item.Message
+                                        </p>
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                        <div class="add-comment">
+                            <header>
+                                <h3 class="h6">Leave a reply</h3>
+                            </header>
+                            <form asp-page-handler="AddComment" class="commenting-form">
+                                <input type="hidden" asp-for="@Model.Comment.ArticleId" value="@Model.Article.Id" />
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <input type="text" asp-for="@Model.Comment.Name" placeholder="Name" class="form-control">
+                                        <span asp-validation-for="@Model.Comment.Name" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <input type="email" asp-for="@Model.Comment.Email" placeholder="Email Address (will not be published)" class="form-control">
+                                        <span asp-validation-for="@Model.Comment.Email" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <textarea asp-for="@Model.Comment.Message" placeholder="Type your comment" class="form-control"></textarea>
+                                        <span asp-validation-for="@Model.Comment.Message" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <button type="submit" class="btn btn-secondary">Submit Comment</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

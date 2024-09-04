@@ -1,0 +1,11 @@
+
+A web application Created with ASP .NET CORE technology and using Onion architecture Implemented.
+
+This is a simple sample project for Onion Architecture implemented using ASP .NET CORE.
+Because it is only an example for this architecture, 
+the business logic and modules of this project are considered simple and only focused on how to implement the architecture.
+
+Alireza Heydari >
+
+Email : alireza80heydri@gmail.com
+WhatsApp : +98 916 758 4020

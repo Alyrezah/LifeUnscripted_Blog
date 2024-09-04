@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LifeUnscripted_Blog.Application.Contracts\LifeUnscripted_Blog.Application.Contracts.csproj" />
+    <ProjectReference Include="..\LifeUnscripted_Blog.Common\LifeUnscripted_Blog.Common.csproj" />
+    <ProjectReference Include="..\LifeUnscripted_Blog.Domain\LifeUnscripted_Blog.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

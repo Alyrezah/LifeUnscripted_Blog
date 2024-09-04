@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\site\vendor\font-awesome\less\" />
+    <Folder Include="wwwroot\site\vendor\font-awesome\scss\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LifeUnscripted_Blog.Application.Contracts\LifeUnscripted_Blog.Application.Contracts.csproj" />
+    <ProjectReference Include="..\LifeUnscripted_Blog.Infra.Query\LifeUnscripted_Blog.Infra.Query.csproj" />
+    <ProjectReference Include="..\LifeUnscripted_Blog.Infra.ServicesRegistration\LifeUnscripted_Blog.Infra.ServicesRegistration.csproj" />
+  </ItemGroup>
+
+</Project>

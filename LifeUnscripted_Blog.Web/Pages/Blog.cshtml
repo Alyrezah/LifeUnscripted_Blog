@@ -1,0 +1,102 @@
+﻿@page
+@model LifeUnscripted_Blog.Web.Pages.BlogModel
+@{
+    ViewData["Title"] = "Blog";
+}
+
+<div class="container">
+    <div class="row">
+        <!-- Latest Posts -->
+        <main class="posts-listing col-lg-8">
+            <div class="container">
+                <div class="row">
+                    <!-- post -->
+                    @foreach (var item in Model.Articles)
+                    {
+                        <div class="post col-xl-6">
+                            <div class="post-thumbnail"><a href="/Article/@item.Slug"><img src="~/pictures/Articles/@item.ImageName" alt="..." class="img-fluid"></a></div>
+                            <div class="post-details">
+                                <div class="post-meta d-flex justify-content-between">
+                                    <div class="date meta-last">@item.CreationDate</div>
+                                    <div class="category"><a href="/Blog?Search.Category=@item.CategorySlug">@item.Category</a></div>
+                                </div><a href="/Article/@item.Slug">
+                                    <h3 class="h4">@item.Title</h3>
+                                </a>
+                                <p class="text-muted">@item.ShortDescription</p>
+                                <footer class="post-footer d-flex align-items-center">
+                                    <a href="#" class="author d-flex align-items-center flex-wrap">
+                                        <div class="avatar"><img src="~/site/img/avatar-1.jpg" alt="..." class="img-fluid"></div>
+                                        <div class="title"><span>@item.Author</span></div>
+                                    </a>
+                                    <div class="date"><i class="icon-clock"></i>@item.CreationDate</div>
+                                    <div class="comments meta-last"><i class="icon-comment"></i>@item.CommentCount</div>
+                                </footer>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </main>
+        <aside class="col-lg-4">
+            <!-- Widget [Search Bar Widget]-->
+            <div class="widget search">
+                <header>
+                    <h3 class="h6">Search the blog</h3>
+                </header>
+                <form action="/Blog" method="get" class="search-form">
+                    <div class="form-group">
+                        <input type="search" value="@Model.Search.Title" asp-for="@Model.Search.Title" placeholder="What are you looking for?">
+                        <button type="submit" class="submit"><i class="icon-search"></i></button>
+                    </div>
+                </form>
+            </div>
+            <!-- Widget [Latest Posts Widget] -->
+            <div class="widget latest-posts">
+                <header>
+                    <h3 class="h6">Latest Posts</h3>
+                </header>
+                <div class="blog-posts">
+                    @foreach (var item in Model.LatestArticles)
+                    {
+                        <a href="#">
+                            <div class="item d-flex align-items-center">
+                                <div class="image"><img src="~/pictures/Articles/@item.ImageName" alt="..." class="img-fluid"></div>
+                                <div class="title">
+                                    <strong>@item.Title</strong>
+                                    <div class="d-flex align-items-center">
+           
+                                        <div class="comments"><i class="icon-comment"></i>@item.CommentCount</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    }
+                </div>
+            </div>
+            <!-- Widget [Categories Widget]-->
+            <div class="widget categories">
+                <header>
+                    <h3 class="h6">Categories</h3>
+                </header>
+                @foreach (var item in Model.ArticleCategories)
+                {
+                    <div class="item d-flex justify-content-between"><a href="/Blog?Search.Category=@item.Slug">@item.Title</a><span>@item.ArticlesCount</span></div>
+                }
+            </div>
+            <!-- Widget [Tags Cloud Widget]-->
+            <div class="widget tags">
+                <header>
+                    <h3 class="h6">Tags</h3>
+                </header>
+                <ul class="list-inline">
+                    <li class="list-inline-item"><a href="#" class="tag">#Business</a></li>
+                    <li class="list-inline-item"><a href="#" class="tag">#Technology</a></li>
+                    <li class="list-inline-item"><a href="#" class="tag">#Fashion</a></li>
+                    <li class="list-inline-item"><a href="#" class="tag">#Sports</a></li>
+                    <li class="list-inline-item"><a href="#" class="tag">#Economy</a></li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+</div>

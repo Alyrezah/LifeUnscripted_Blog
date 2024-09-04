@@ -1,0 +1,103 @@
+﻿@page "{id:long}"
+@model LifeUnscripted_Blog.Web.Areas.Administrator.Pages.ManageArticles.EditModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h2>Create New Article</h2>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post" asp-page="Edit" enctype="multipart/form-data">
+                    <input type="hidden" asp-for="@Model.Article.Id" value="@Model.Article.Id" />
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label asp-for="@Model.Article.Title" class="control-label"></label>
+                            <input asp-for="@Model.Article.Title" class="form-control" />
+                            <span asp-validation-for="@Model.Article.Title" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    @{
+                        var selectItems = Model.SeleteCategoryItems;
+                    }
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label asp-for="@Model.Article.CategoryId" class="control-label"></label>
+                            <select class="form-control" asp-for="@Model.Article.CategoryId" asp-items="selectItems">
+                                <option value="@null">Select Category</option>
+                            </select>
+                            <span asp-validation-for="@Model.Article.CategoryId" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label asp-for="@Model.Article.Slug" class="control-label"></label>
+                            <input asp-for="@Model.Article.Slug" class="form-control" />
+                            <span asp-validation-for="@Model.Article.Slug" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label asp-for="@Model.Article.MetaTag" class="control-label"></label>
+                            <input asp-for="@Model.Article.MetaTag" class="form-control" />
+                            <span asp-validation-for="@Model.Article.MetaTag" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-8 col-sm-12">
+                        <div class="form-group">
+                            <label asp-for="@Model.Article.ShortDescription" class="control-label"></label>
+                            <textarea asp-for="@Model.Article.ShortDescription" class="form-control" rows="3"></textarea>
+                            <span asp-validation-for="@Model.Article.ShortDescription" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-8 col-sm-12">
+                        <div class="form-group">
+                            <label asp-for="@Model.Article.MetaDescription" class="control-label"></label>
+                            <textarea asp-for="@Model.Article.MetaDescription" class="form-control" rows="3"></textarea>
+                            <span asp-validation-for="@Model.Article.MetaDescription" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-8 col-sm-12">
+                        <div class="form-group">
+                            <label asp-for="@Model.Article.Description" class="control-label"></label>
+                            <textarea asp-for="@Model.Article.Description" class="form-control" rows="5"></textarea>
+                            <span asp-validation-for="@Model.Article.Description" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label asp-for="@Model.Image" class="control-label"></label>
+                            <input type="file" asp-for="@Model.Image" class="form-control" />
+                            <span asp-validation-for="@Model.Image" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group m-3">
+                        <input type="submit" value="Edit" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

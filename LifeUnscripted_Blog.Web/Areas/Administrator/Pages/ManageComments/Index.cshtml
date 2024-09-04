@@ -1,0 +1,102 @@
+﻿@page
+@model LifeUnscripted_Blog.Web.Areas.Administrator.Pages.ManageComments.IndexModel
+@{
+    ViewData["Title"] = "Comments";
+}
+
+<h1>Comments</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                #
+            </th>
+            <th>
+                Article
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                CreationDate
+            </th>
+            <th>
+                Message
+            </th>
+            <th>
+                IsConfirm
+            </th>
+            <th>
+                Status
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Comments)
+        {
+            <tr>
+                <td>
+                    @item.Id
+                </td>
+                <td>
+                    @item.Article
+                </td>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @item.Email
+                </td>
+                <td>
+                    @item.CreationDate
+                </td>
+                <td>
+                    @item.Message
+                </td>
+                @if (item.IsConfirm)
+                {
+                    <td class="text-success">
+                        Confirmed
+                    </td>
+                }
+                else
+                {
+                    <td class="text-info">
+                        Awaiting Confirmation
+                    </td>
+                }
+                @if (item.IsDeleted)
+                {
+                    <td class="text-danger">
+                        Deleted
+                    </td>
+                }
+                else
+                {
+                    <td class="text-success">
+                        Active
+                    </td>
+                }
+                <td>
+                    @if (item.IsDeleted)
+                    {
+                        <a asp-page-handler="ChangeIsDeleted" asp-route-id="@item.Id">Restore</a>
+                    }
+                    else
+                    {
+                        <a asp-page-handler="ChangeIsDeleted" asp-route-id="@item.Id">Delete</a>
+                    }
+                    @if (!item.IsConfirm)
+                    {
+                       <text>|</text> <a asp-page-handler="Confirm" asp-route-id="@item.Id">Confirm</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
